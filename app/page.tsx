@@ -29,7 +29,11 @@ export default function Home() {
   if (isLoading) {
     return (
       <main className="min-h-screen bg-[#e04bbd] flex flex-col items-center justify-center">
-        <div className="text-white text-xl">Loading...</div>
+        <div className="flex flex-col items-center">
+          <div className="loader ease-linear rounded-full border-8 border-t-8 border-gray-200 h-32 w-32 mb-4"></div>
+          <h2 className="text-white text-xl font-semibold">Loading...</h2>
+          <p className="text-white text-md">Please wait while we prepare everything for you.</p>
+        </div>
       </main>
     )
   }
