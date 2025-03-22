@@ -7,6 +7,7 @@ import { Progress } from "@/components/ui/progress"
 import { AlertCircle, BrainCircuit, CheckCircle2, Terminal, CheckCheck, X } from "lucide-react"
 import Image from "next/image"
 import { questions } from "@/lib/constants"
+import { verifyIQScore } from "@/lib/service"
 
 // IQ test questions
 
@@ -133,7 +134,6 @@ export default function IQTest({ username }: IQTestProps): ReactElement {
         setShowResults(true)
         setTestSubmitted(true)
 
-        // Save results to sessionStorage
         setTimeout(saveProgress, 0)
     }
 
@@ -142,45 +142,39 @@ export default function IQTest({ username }: IQTestProps): ReactElement {
         setIsProving(true)
         setConsoleOutput([])
 
-        // Mock backend processing with setTimeout
         addConsoleOutput("Initializing IQ verification process...")
         addConsoleOutput(`User: ${username}`)
 
         setTimeout(() => {
-            addConsoleOutput("Connecting to neural network...")
-
+            addConsoleOutput("Analyzing response patterns...")
             setTimeout(() => {
-                addConsoleOutput("Analyzing response patterns...")
-
+                addConsoleOutput("Calculating cognitive metrics...")
                 setTimeout(() => {
-                    addConsoleOutput("Calculating cognitive metrics...")
-
+                    addConsoleOutput("Applying psychometric algorithms...")
                     setTimeout(() => {
-                        addConsoleOutput("Applying psychometric algorithms...")
-
-                        setTimeout(() => {
-                            addConsoleOutput("Validating IQ score...")
-
-                            setTimeout(() => {
-                                addConsoleOutput("Cross-referencing with global database...")
-
+                        addConsoleOutput("Proving IQ score... It may take 10-30 minutes due to server load.")
+                        verifyIQScore(username, iqScore)
+                            .then((result) => {
                                 setTimeout(() => {
-                                    addConsoleOutput("Generating certificate...")
+                                    addConsoleOutput("Verification complete!")
+                                    addConsoleOutput(`Proof: ${result.proof}`)
+                                    setIsProving(false)
+                                    setIsProved(true)
+                                    saveProgress()
+                                }, 1000)
+                            })
+                            .catch((error) => {
+                                console.error("Verification error:", error)
+                                addConsoleOutput("ERROR: Verification process failed")
+                                addConsoleOutput(error.message)
+                                setIsProving(false)
+                            })
+                    }, 1000)
+                }, 600)
+            }, 500)
+        }, 300)
 
-                                    setTimeout(() => {
-                                        addConsoleOutput("Verification complete!")
-                                        addConsoleOutput(`IQ Score for ${username}: ${iqScore} - Verified ✓`)
-                                        setIsProving(false)
-                                        setIsProved(true)
-                                        saveProgress()
-                                    }, 1000)
-                                }, 800)
-                            }, 700)
-                        }, 600)
-                    }, 500)
-                }, 400)
-            }, 300)
-        }, 200)
+
     }
 
     const addConsoleOutput = (text: string) => {
@@ -292,6 +286,34 @@ export default function IQTest({ username }: IQTestProps): ReactElement {
                                         <div>
                                             <h3 className="font-bold text-green-400">Verification Successful</h3>
                                             <p className="text-sm text-green-300/80">Your IQ score has been verified and recorded.</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    )}
+
+                    {consoleOutput.includes("Error") && (
+                        <div className="w-full relative mt-4">
+                            <div className="bg-gray-100 rounded-lg overflow-hidden shadow-md">
+                                {/* Window title bar */}
+                                <div className="flex items-center bg-gradient-to-r from-gray-200 to-gray-300 py-1 px-2 relative border-b border-gray-300">
+                                    <div className="flex items-center space-x-1.5 absolute left-1.5">
+                                        <div className="w-2.5 h-2.5 bg-red-500 rounded-full"></div>
+                                        <div className="w-2.5 h-2.5 bg-yellow-500 rounded-full"></div>
+                                        <div className="w-2.5 h-2.5 bg-green-500 rounded-full"></div>
+                                    </div>
+                                    <div className="mx-auto flex items-center">
+                                        <AlertCircle className="h-3 w-3 text-gray-700 mr-1" />
+                                        <span className="text-gray-700 font-medium text-xs">ERROR STATUS</span>
+                                    </div>
+                                </div>
+                                <div className="bg-black p-3">
+                                    <div className="bg-red-500/20 border border-red-500 rounded-lg p-4 flex items-center gap-3">
+                                        <AlertCircle className="h-6 w-6 text-red-400" />
+                                        <div>
+                                            <h3 className="font-bold text-red-400">Verification Failed</h3>
+                                            <p className="text-sm text-red-300/80">There was an error during the verification process. Please try again.</p>
                                         </div>
                                     </div>
                                 </div>

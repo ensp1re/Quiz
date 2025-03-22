@@ -5,6 +5,8 @@ import { Twitter } from "lucide-react"
 import InfoModal from "@/components/InfoModal"
 import UsernameForm from "@/components/UsernameForm"
 import IQTest from "@/components/IqTest"
+import SocialLinks from "@/components/SocialLinks"
+import MusicPlayer from "@/components/MusicPlayer"
 
 export default function Home() {
   const [isInfoModalOpen, setIsInfoModalOpen] = useState(false)
@@ -35,6 +37,7 @@ export default function Home() {
   return (
     <main className="min-h-screen bg-[#e04bbd] flex flex-col items-center justify-center p-4 relative overflow-auto">
       <InfoModal isOpen={isInfoModalOpen} onClose={() => setIsInfoModalOpen(false)} />
+      <SocialLinks />
 
       <div className="absolute inset-0 z-0 flex items-center justify-center">
         <div className="w-[95%] h-[95%] bg-black rounded-lg border-4 border-[#e04bbd] overflow-hidden relative">
@@ -74,13 +77,11 @@ export default function Home() {
                 <div className="w-3 h-3 bg-yellow-500 rounded-full hover:bg-yellow-600 transition-colors"></div>
                 <div className="w-3 h-3 bg-green-500 rounded-full hover:bg-green-600 transition-colors"></div>
               </div>
-              <div className="mx-auto flex items-center">
-                <span className="text-gray-700 font-medium text-sm">VeriStar IQ Test - {username}</span>
-              </div>
+
             </div>
 
             <div className="bg-black text-center border-b border-[#e04bbd] py-4">
-              <h1 className="text-3xl md:text-4xl font-bold text-amber-500 tracking-wider">VeriStar IQ Test</h1>
+              <h1 className="text-3xl md:text-4xl font-bold text-amber-500 tracking-wider">IQ Test</h1>
               <p className="text-amber-300/80 mt-2">Test your knowledge with our advanced IQ assessment system</p>
             </div>
 
@@ -89,47 +90,7 @@ export default function Home() {
             </div>
           </div>
 
-          <div className="grid grid-cols-3 gap-4 mb-16 w-full max-w-4xl z-10">
-            <div className="bg-black/80 border-4 border-[#e04bbd] rounded-lg p-4">
-              <h3 className="text-amber-500 uppercase text-sm font-bold mb-2">SYSTEM STATUS</h3>
-              <div className="text-amber-500 font-mono font-bold">NOMINAL</div>
-              <div className="text-amber-400/70 text-xs mt-2">PWR: 72% | TR: 27%</div>
-            </div>
 
-            <div className="bg-black/80 border-4 border-[#e04bbd] rounded-lg p-4">
-              <h3 className="text-amber-500 uppercase text-sm font-bold mb-2">Neural Grid</h3>
-              <div className="h-16 bg-black border border-green-500/30 rounded grid grid-cols-12 grid-rows-6 gap-px">
-                {Array(72)
-                  .fill(0)
-                  .map((_, i) => (
-                    <div key={i} className="bg-green-500/10"></div>
-                  ))}
-              </div>
-            </div>
-
-            <div className="bg-black/80 border-4 border-[#e04bbd] rounded-lg p-4">
-              <h3 className="text-amber-500 uppercase text-sm font-bold mb-2">POWER SYSTEMS</h3>
-              <div className="space-y-2">
-                <div className="w-full bg-gray-800 rounded-full h-2">
-                  <div className="bg-amber-500 h-2 rounded-full" style={{ width: "85%" }}></div>
-                </div>
-                <div className="w-full bg-gray-800 rounded-full h-2">
-                  <div className="bg-amber-500 h-2 rounded-full" style={{ width: "92%" }}></div>
-                </div>
-                <div className="w-full bg-gray-800 rounded-full h-2">
-                  <div className="bg-amber-500 h-2 rounded-full" style={{ width: "78%" }}></div>
-                </div>
-              </div>
-            </div>
-            <div className="col-span-3 mt-2">
-              <button
-                className="w-full bg-amber-500 hover:bg-amber-600 text-black py-2 rounded-lg font-bold"
-                onClick={() => setIsInfoModalOpen(true)}
-              >
-                Info
-              </button>
-            </div>
-          </div>
 
         </>
       )}
@@ -149,6 +110,7 @@ export default function Home() {
           </a>
         </div>
       </div>
+      <MusicPlayer src="/music/iq.mp3" />
     </main>
   )
 }
