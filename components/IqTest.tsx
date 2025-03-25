@@ -124,9 +124,6 @@ export default function IQTest({ username }: IQTestProps): ReactElement {
             }
         })
 
-
-        // Simple IQ calculation (for demonstration purposes)
-        // Base IQ of 100, with each correct answer worth ~4 IQ points
         const calculatedIQ = Math.round(70 + correctAnswers * 4)
 
         setScore(correctAnswers)
@@ -144,20 +141,28 @@ export default function IQTest({ username }: IQTestProps): ReactElement {
 
         addConsoleOutput("Initializing IQ verification process...")
         addConsoleOutput(`User: ${username}`)
+        addConsoleOutput(`IQ Score: ${iqScore}`)
 
         setTimeout(() => {
             addConsoleOutput("Analyzing response patterns...")
             setTimeout(() => {
-                addConsoleOutput("Calculating cognitive metrics...")
                 setTimeout(() => {
-                    addConsoleOutput("Applying psychometric algorithms...")
+                    addConsoleOutput("Running SP1 ZK program...")
                     setTimeout(() => {
-                        addConsoleOutput("Proving IQ score... It may take 10-30 minutes due to server load.")
+                        addConsoleOutput("Proving IQ score... It may take 1-5 minutes.")
                         verifyIQScore(username, iqScore)
                             .then((result) => {
                                 setTimeout(() => {
                                     addConsoleOutput("Verification complete!")
-                                    addConsoleOutput(`Proof: ${result.proof}`)
+                                    if (result.success) {
+                                        addConsoleOutput("Verification successful!")
+                                    } else {
+                                        addConsoleOutput("Verification failed.")
+                                    }
+                                    addConsoleOutput(`Proof: ${result.proofHash}`)
+                                    addConsoleOutput(`Output: ${result.output}`)
+                                    addConsoleOutput(`Verified: ${result.verified}`)
+                                    addConsoleOutput(`Timestamp: ${new Date(result.timestamp).toLocaleString()}`)
                                     setIsProving(false)
                                     setIsProved(true)
                                     saveProgress()

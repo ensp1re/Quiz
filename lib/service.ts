@@ -3,8 +3,14 @@ import dotenv from "dotenv";
 
 dotenv.config();
 
-export interface VerificationResult {
-  proof: string;
+interface ProofResponse {
+  success: boolean;
+  proofHash: string;
+  output: string;
+  username: string;
+  iq_score: number;
+  timestamp: number;
+  verified: boolean;
 }
 
 if (!process.env.NEXT_PUBLIC_PROOF_API_URL) {
@@ -15,11 +21,14 @@ if (!process.env.NEXT_PUBLIC_PROOF_API_URL) {
 export async function verifyIQScore(
   username: string,
   score: number
-): Promise<VerificationResult> {
+): Promise<ProofResponse> {
   try {
-    const response = await axios.post(
-      `${process.env.NEXT_PUBLIC_PROOF_API_URL}/generate-proof`,
-      { username, iq_score: score },
+    const response = await axios.post<ProofResponse>(
+      `${process.env.NEXT_PUBLIC_PROOF_API_URL}/api/generate-proof`,
+      {
+        username: username,
+        iq_score: score, 
+      },
       {
         headers: {
           "Content-Type": "application/json",
