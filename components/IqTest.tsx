@@ -162,7 +162,7 @@ export default function IQTest({ username }: IQTestProps): ReactElement {
                                     addConsoleOutput(`Proof: ${result.proofHash}`)
                                     addConsoleOutput(`Output: ${result.output}`)
                                     addConsoleOutput(`Verified: ${result.verified}`)
-                                    addConsoleOutput(`Timestamp: ${new Date(result.timestamp).toLocaleString()}`)
+                                    addConsoleOutput(`Timestamp: ${new Date().toLocaleString()}`)
                                     setIsProving(false)
                                     setIsProved(true)
                                     saveProgress()
