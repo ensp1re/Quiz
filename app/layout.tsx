@@ -7,7 +7,7 @@ import { ThemeProvider } from "next-themes"
 const inter = Inter({ subsets: ["latin"] })
 
 export const metadata: Metadata = {
-  title: "BrainMatrix - IQ Test",
+  title: "BrainSuccinct - IQ Test",
   description: "Test your intelligence quotient with our advanced assessment system",
 }
 
