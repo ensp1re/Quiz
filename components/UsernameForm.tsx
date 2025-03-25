@@ -47,7 +47,7 @@ export default function UsernameForm({ onSubmit }: UsernameFormProps) {
 
             <div className="bg-black p-6">
                 <div className="text-center mb-6">
-                    <h2 className="text-xl font-bold text-amber-500">Welcome to VeriStar IQ Test</h2>
+                    <h2 className="text-xl font-bold text-amber-500">Welcome to IQ Test</h2>
                     <p className="text-amber-300/80 mt-2">Please enter your username to begin the test</p>
                 </div>
 
